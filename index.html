@@ -24,11 +24,11 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 30px 20px;
+            padding: 20px 20px 90px 20px;
             overflow-x: hidden;
         }
 
-        /* HARDCORE AUTH SCREEN */
+        /* HARDCORE GYM AUTHENTICATION LAYER */
         .profile-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -212,6 +212,14 @@
             letter-spacing: 6px;
             text-transform: uppercase;
             margin-bottom: 35px;
+        }
+
+        /* Views management layout */
+        .page-view {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Rules Container */
@@ -471,6 +479,68 @@
             box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
         }
 
+        /* GAME STYLE BOTTOM NAVIGATION BAR */
+        .game-navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(180deg, #151515 0%, #080808 100%);
+            border-top: 3px solid #252525;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 999;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+        }
+
+        .nav-item {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: #888;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            fill: #888;
+            margin-bottom: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active {
+            color: #ff1e1e;
+            background: rgba(255, 30, 30, 0.03);
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: #ff1e1e;
+            box-shadow: 0 0 10px #ff1e1e;
+        }
+
+        .nav-item.active svg {
+            fill: #ff1e1e;
+            filter: drop-shadow(0 0 5px rgba(255, 30, 30, 0.6));
+        }
+
         /* Popup Box */
         .custom-alert {
             display: none;
@@ -558,46 +628,69 @@
     </div>
 
     <h1>WARRIOR MODE ACTIVATED</h1>
-    <div class="subtitle">365 Days Ultimate Discipline</div>
+    <div class="subtitle" id="view-subtitle">365 Days Ultimate Discipline</div>
 
-    <!-- Rules Container -->
-    <div class="rules-container">
-        <div class="rule-item"><span>[RULE 01]</span> DO NO WRONG.</div>
-        <div class="rule-item"><span>[RULE 02]</span> TOLERATE NO INJUSTICE.</div>
-        <div class="rule-item"><span>[RULE 03]</span> NO MASTURBATION / NO PORN. STICK TO DISCIPLINE.</div>
-        <div class="rule-item"><span>[RULE 04]</span> NO DISTRACTIONS. FOCUS ONLY ON GROWTH.</div>
-        <div class="rule-item"><span>[RULE 05]</span> DO NOT TURN ON INCOGNITO MODE; DOING SO WILL COMPLETELY WIPE AND DESTROY ALL YOUR PROGRESS.</div>
-    </div>
-
-    <!-- Main Controller -->
-    <div class="dashboard">
-        <div class="counter-display">
-            <strong id="days-count">0</strong> <span>/</span> 365 DAYS SECURED
+    <!-- DYNAMIC CONTROLLABLE PAGES -->
+    <!-- HOME VIEW (Default) -->
+    <div id="home-view" class="page-view">
+        <!-- Rules Container -->
+        <div class="rules-container">
+            <div class="rule-item"><span>[RULE 01]</span> DO NO WRONG.</div>
+            <div class="rule-item"><span>[RULE 02]</span> TOLERATE NO INJUSTICE.</div>
+            <div class="rule-item"><span>[RULE 03]</span> NO MASTURBATION / NO PORN. STICK TO DISCIPLINE.</div>
+            <div class="rule-item"><span>[RULE 04]</span> NO DISTRACTIONS. FOCUS ONLY ON GROWTH.</div>
+            <div class="rule-item"><span>[RULE 05]</span> DO NOT TURN ON INCOGNITO MODE; DOING SO WILL COMPLETELY WIPE AND DESTROY ALL YOUR PROGRESS.</div>
         </div>
-        <button id="action-trigger" class="trigger-btn" onclick="executeDailyLog()">LOG TODAY'S WORKOUT</button>
-        <button class="fail-btn" onclick="triggerFailureProtocol()">REPORT ACCIDENT / FAIL</button>
+
+        <!-- Main Controller -->
+        <div class="dashboard">
+            <div class="counter-display">
+                <strong id="days-count">0</strong> <span>/</span> 365 DAYS SECURED
+            </div>
+            <button id="action-trigger" class="trigger-btn" onclick="executeDailyLog()">LOG TODAY'S WORKOUT</button>
+            <button class="fail-btn" onclick="triggerFailureProtocol()">REPORT ACCIDENT / FAIL</button>
+        </div>
+
+        <!-- Visual Matrix Graph -->
+        <div class="matrix-grid" id="matrix"></div>
     </div>
 
-    <!-- LIVE GLOBAL LEADERBOARD -->
-    <div class="leaderboard-container">
-        <table class="leaderboard-table">
-            <thead>
-                <tr>
-                    <th style="width: 15%">Rank</th>
-                    <th style="width: 55%">Warrior Name</th>
-                    <th style="width: 30%">Days Cleared</th>
-                </tr>
-            </thead>
-            <tbody id="leaderboard-rows">
-                <tr>
-                    <td colspan="3" style="text-align: center; color: #666; padding: 20px;">Loading Rankings...</td>
-                </tr>
-            </tbody>
-        </table>
+    <!-- LEAGUES / LEADERBOARD VIEW -->
+    <div id="leagues-view" class="page-view" style="display: none;">
+        <!-- LIVE GLOBAL LEADERBOARD -->
+        <div class="leaderboard-container">
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%">Rank</th>
+                        <th style="width: 55%">Warrior Name</th>
+                        <th style="width: 30%">Days Cleared</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-rows">
+                    <tr>
+                        <td colspan="3" style="text-align: center; color: #666; padding: 20px;">Loading Rankings...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <!-- Visual Matrix Graph -->
-    <div class="matrix-grid" id="matrix"></div>
+    <!-- GAME STYLE BOTTOM NAVIGATION MENU BAR -->
+    <div class="game-navbar">
+        <div class="nav-item active" id="nav-home" onclick="switchView('home')">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            HOME
+        </div>
+        <div class="nav-item" id="nav-leagues" onclick="switchView('leagues')">
+            <svg viewBox="0 0 24 24">
+                <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v3c0 2.42 1.72 4.44 4.00 4.90C7.79 16.43 9.69 18 12 18s4.21-1.57 4.98-3.10c2.28-.46 4-2.48 4-4.90V7c0-1.1-.9-2-2-2zm-12 5V7h2v3c0 .55-.45 1-1 1s-1-.45-1-1zm10 0c0 .55-.45 1-1 1s-1-.45-1-1V7h2v3zM12 20h-2v2h4v-2h-2z"/>
+            </svg>
+            LEAGUES
+        </div>
+    </div>
 
     <!-- Custom Alert Popup -->
     <div class="custom-alert" id="failure-alert">
@@ -607,12 +700,12 @@
         </div>
     </div>
 
-    <!-- FIREBASE AND AUTH ENGINE CORE SCRIPT -->
+    <!-- FIREBASE AND ENGINE SCRIPT -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
         import { getDatabase, ref, set, get, child, onValue } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
 
-        // Firebase Setup configuration
+        // Firebase Credentials
         const firebaseConfig = {
             apiKey: "AIzaSyAigFfSmMz8HSdEwApTuN2T6L5h7i-osKQ",
             authDomain: "warriormode.firebaseapp.com",
@@ -628,9 +721,8 @@
         const database = getDatabase(app);
 
         const TOTAL_NODES = 365;
-        let isLoginMode = true; // Toggle variable between Login and Register states
+        let isLoginMode = true;
         
-        // System variables mapping
         let currentUser = localStorage.getItem('warriorUserSession') || null;
         let coreData = {
             securedDays: [],
@@ -646,7 +738,6 @@
             document.getElementById('auth-screen').style.display = 'none';
             document.getElementById('user-welcome-display').innerText = `Welcome, ${currentUser}`;
             
-            // Instantly fetch existing score tracking matrices from database storage endpoints
             const dbSafeName = currentUser.replace(/[.#$[\]]/g, "");
             get(ref(database, 'users/' + dbSafeName)).then((snapshot) => {
                 if(snapshot.exists()) {
@@ -661,8 +752,9 @@
             listenToLeaderboard();
         }
 
-        window.toggleAuthMode = function() {
-            isLoginMode = !isLoginMode;
+        // State changer function (Force specific visual modes)
+        window.setAuthMode = function(toLogin) {
+            isLoginMode = toLogin;
             const title = document.getElementById('auth-title');
             const subTitle = document.getElementById('auth-subtitle');
             const toggleMsg = document.getElementById('auth-toggle-msg');
@@ -681,9 +773,16 @@
             }
         }
 
+        window.toggleAuthMode = function() {
+            window.setAuthMode(!isLoginMode);
+        }
+
+        // Dynamic Auth Action Core Handler
         window.handleAuthAction = function() {
-            const username = document.getElementById('auth-username').value.trim().toLowerCase();
-            const password = document.getElementById('auth-password').value.trim();
+            const usernameInput = document.getElementById('auth-username');
+            const passwordInput = document.getElementById('auth-password');
+            const username = usernameInput.value.trim().toLowerCase();
+            const password = passwordInput.value.trim();
 
             if (!username || !password) {
                 alert("Credentials fields cannot be left blank.");
@@ -694,7 +793,6 @@
             const userRef = ref(database, 'users/' + dbSafeName);
 
             if (isLoginMode) {
-                // System validation for authentication logic
                 get(userRef).then((snapshot) => {
                     if (snapshot.exists()) {
                         const accountData = snapshot.val();
@@ -703,17 +801,23 @@
                             localStorage.setItem('warriorUserSession', currentUser);
                             window.bootSystem();
                         } else {
-                            alert("INCORRECT PASSWORD ACCESS DENIED.");
+                            alert("INCORRECT PASSWORD! ACCESS DENIED.");
+                            // Clear fields automatically on wrong password
+                            usernameInput.value = '';
+                            passwordInput.value = '';
                         }
                     } else {
-                        alert("Warrior identity not found. Please Register.");
+                        // FIX: Account not found? Automatic redirect to Create Account screen (NO background creation)
+                        alert("Warrior ID not found! Redirecting to 'Create Account' page...");
+                        window.setAuthMode(false); // Bhejo Sign-Up Screen par
                     }
                 });
             } else {
-                // Registration checks configuration logic
                 get(userRef).then((snapshot) => {
                     if (snapshot.exists()) {
                         alert("Username already active inside database server logs.");
+                        usernameInput.value = '';
+                        passwordInput.value = '';
                     } else {
                         set(userRef, {
                             username: username,
@@ -731,6 +835,29 @@
             }
         }
 
+        window.switchView = function(viewName) {
+            const homeView = document.getElementById('home-view');
+            const leaguesView = document.getElementById('leagues-view');
+            const navHome = document.getElementById('nav-home');
+            const navLeagues = document.getElementById('nav-leagues');
+            const subTitle = document.getElementById('view-subtitle');
+
+            navHome.classList.remove('active');
+            navLeagues.classList.remove('active');
+
+            if (viewName === 'home') {
+                homeView.style.display = 'flex';
+                leaguesView.style.display = 'none';
+                navHome.classList.add('active');
+                subTitle.innerText = "365 Days Ultimate Discipline";
+            } else if (viewName === 'leagues') {
+                homeView.style.display = 'none';
+                leaguesView.style.display = 'flex';
+                navLeagues.classList.add('active');
+                subTitle.innerText = "Global Server Leaderboard Arena";
+            }
+        }
+
         window.triggerSystemLogout = function() {
             localStorage.removeItem('warriorUserSession');
             currentUser = null;
@@ -738,6 +865,7 @@
             document.getElementById('auth-username').value = '';
             document.getElementById('auth-password').value = '';
             document.getElementById('leaderboard-rows').innerHTML = '<tr><td colspan="3" style="text-align: center; color: #666; padding: 20px;">Loading Rankings...</td></tr>';
+            switchView('home');
             window.bootSystem();
         }
 
@@ -795,11 +923,9 @@
             if (!currentUser) return;
             const dbSafeName = currentUser.replace(/[.#$[\]]/g, "");
             
-            // Sync current user states to core records
             set(ref(database, 'users/' + dbSafeName + '/securedDays'), coreData.securedDays);
             set(ref(database, 'users/' + dbSafeName + '/lastLogTimeStamp'), coreData.lastLogTimeStamp);
 
-            // Sync global state metrics leaderboard structures
             set(ref(database, 'leaderboard/' + dbSafeName), {
                 name: currentUser,
                 score: coreData.securedDays.length,
@@ -878,7 +1004,6 @@
             document.getElementById('failure-alert').style.display = 'none';
         }
 
-        // Initialize App Setup Execution Loops
         window.bootSystem();
     </script>
 </body>
