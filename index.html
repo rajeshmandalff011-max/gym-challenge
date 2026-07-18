@@ -28,7 +28,7 @@
             overflow-x: hidden;
         }
 
-        /* HARDCORE GYM STYLE INITIAL SCREEN */
+        /* HARDCORE AUTH SCREEN */
         .profile-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -58,7 +58,7 @@
         }
 
         .profile-card::before {
-            content: "IRON SANCTUARY";
+            content: "SECURE GATEWAY";
             position: absolute;
             top: -15px;
             left: 50%;
@@ -90,25 +90,24 @@
             text-transform: uppercase;
             letter-spacing: 4px;
             font-weight: 700;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .profile-card input {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: #141414;
             border: 2px solid #333;
             color: #fff;
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 700;
             border-radius: 4px;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             text-align: center;
             outline: none;
             letter-spacing: 2px;
             transition: all 0.3s;
-            text-transform: uppercase;
         }
 
         .profile-card input:focus {
@@ -117,12 +116,24 @@
             box-shadow: 0 0 20px rgba(255, 30, 30, 0.15);
         }
 
+        .auth-toggle-text {
+            color: #aaa;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .auth-toggle-text span {
+            color: #ff1e1e;
+            text-decoration: underline;
+            font-weight: 700;
+        }
+
         .profile-card button {
             font-family: 'Orbitron', sans-serif;
             background: linear-gradient(180deg, #ff1e1e 0%, #900000 100%);
             color: #fff;
             border: none;
-            padding: 18px 40px;
+            padding: 16px 40px;
             font-size: 1.2rem;
             font-weight: 900;
             letter-spacing: 2px;
@@ -140,16 +151,44 @@
             transform: translateY(-2px);
         }
 
+        /* Top Bar Dynamic Controls */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 750px;
+            margin-bottom: 15px;
+        }
+
         .welcome-banner {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.2rem;
             color: #ff1e1e;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 15px;
             font-weight: 700;
             text-shadow: 0 0 8px rgba(255, 30, 30, 0.3);
-            text-align: center;
+        }
+
+        .logout-btn {
+            font-family: 'Orbitron', sans-serif;
+            background: transparent;
+            color: #aaa;
+            border: 1px solid #444;
+            padding: 6px 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .logout-btn:hover {
+            background: #ff1e1e;
+            color: #000;
+            border-color: #ff1e1e;
+            box-shadow: 0 0 15px rgba(255, 30, 30, 0.4);
         }
 
         h1 {
@@ -322,6 +361,79 @@
             font-weight: 900;
         }
 
+        /* LIVE GLOBAL LEADERBOARD */
+        .leaderboard-container {
+            width: 100%;
+            max-width: 750px;
+            background: linear-gradient(180deg, #101010 0%, #070707 100%);
+            border: 2px solid #222;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+            position: relative;
+        }
+
+        .leaderboard-container::before {
+            content: "GLOBAL WARRIOR RANKINGS";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #ff1e1e;
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 900;
+            padding: 3px 12px;
+            letter-spacing: 2px;
+            border-radius: 2px;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .leaderboard-table th {
+            font-family: 'Orbitron', sans-serif;
+            color: #ff1e1e;
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 2px solid #333;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .leaderboard-table td {
+            padding: 14px 10px;
+            border-bottom: 1px solid #1a1a1a;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .leaderboard-table tr:hover td {
+            background: rgba(255, 30, 30, 0.03);
+        }
+
+        .rank-highlight {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .rank-1 { color: #ffd700; text-shadow: 0 0 8px rgba(255, 215, 0, 0.4); }
+        .rank-2 { color: #c0c0c0; }
+        .rank-3 { color: #cd7f32; }
+
+        .current-user-row td {
+            background: rgba(255, 30, 30, 0.1) !important;
+            border-top: 1px solid #ff1e1e;
+            border-bottom: 1px solid #ff1e1e;
+        }
+
         /* Matrix Grid UI */
         .matrix-grid {
             display: grid;
@@ -359,7 +471,7 @@
             box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
         }
 
-        /* Custom Popup Box */
+        /* Popup Box */
         .custom-alert {
             display: none;
             position: fixed;
@@ -422,23 +534,33 @@
 </head>
 <body>
 
-    <!-- Gym-Themed Initial Setup Screen -->
-    <div class="profile-overlay" id="setup-screen" style="display: none;">
+    <!-- HARDCORE GYM AUTHENTICATION LAYER -->
+    <div class="profile-overlay" id="auth-screen" style="display: none;">
         <div class="profile-card">
-            <h2>Enter Your Name</h2>
-            <div class="gym-tagline">No Excuses • Only Iron</div>
-            <input type="text" id="username-input" placeholder="RECRUIT NAME..." autocomplete="off">
-            <button onclick="saveUserProfile()">START TRAINING</button>
+            <h2 id="auth-title">WARRIOR LOGIN</h2>
+            <div class="gym-tagline" id="auth-subtitle">ENTER CREDENTIALS TO SYNC DISCIPLINE</div>
+            
+            <input type="text" id="auth-username" placeholder="USERNAME..." autocomplete="off">
+            <input type="password" id="auth-password" placeholder="PASSWORD..." autocomplete="off">
+            
+            <div class="auth-toggle-text" id="auth-toggle-msg" onclick="toggleAuthMode()">
+                New Warrior? <span id="toggle-link-text">Create Account</span>
+            </div>
+            
+            <button id="auth-submit-btn" onclick="handleAuthAction()">PROCEED TO RAMPAGE</button>
         </div>
     </div>
 
-    <!-- Personalized Top Bar Welcome Header -->
-    <div class="welcome-banner" id="user-welcome-display">Welcome, Warrior</div>
+    <!-- Top Personalized Control Navigation -->
+    <div class="top-nav">
+        <div class="welcome-banner" id="user-welcome-display">Welcome, Warrior</div>
+        <button class="logout-btn" onclick="triggerSystemLogout()">LOGOUT</button>
+    </div>
 
     <h1>WARRIOR MODE ACTIVATED</h1>
     <div class="subtitle">365 Days Ultimate Discipline</div>
 
-    <!-- All Rules Completely Translated to English -->
+    <!-- Rules Container -->
     <div class="rules-container">
         <div class="rule-item"><span>[RULE 01]</span> DO NO WRONG.</div>
         <div class="rule-item"><span>[RULE 02]</span> TOLERATE NO INJUSTICE.</div>
@@ -456,6 +578,24 @@
         <button class="fail-btn" onclick="triggerFailureProtocol()">REPORT ACCIDENT / FAIL</button>
     </div>
 
+    <!-- LIVE GLOBAL LEADERBOARD -->
+    <div class="leaderboard-container">
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th style="width: 15%">Rank</th>
+                    <th style="width: 55%">Warrior Name</th>
+                    <th style="width: 30%">Days Cleared</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard-rows">
+                <tr>
+                    <td colspan="3" style="text-align: center; color: #666; padding: 20px;">Loading Rankings...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <!-- Visual Matrix Graph -->
     <div class="matrix-grid" id="matrix"></div>
 
@@ -467,49 +607,142 @@
         </div>
     </div>
 
-    <script>
-        const TOTAL_NODES = 365;
-        let coreData = JSON.parse(localStorage.getItem('warriorCoreData')) || {
-            securedDays: [],
-            lastLogTimeStamp: null,
-            warriorName: null
+    <!-- FIREBASE AND AUTH ENGINE CORE SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+        import { getDatabase, ref, set, get, child, onValue } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
+
+        // Firebase Setup configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAigFfSmMz8HSdEwApTuN2T6L5h7i-osKQ",
+            authDomain: "warriormode.firebaseapp.com",
+            databaseURL: "https://warriormode-default-rtdb.firebaseio.com",
+            projectId: "warriormode",
+            storageBucket: "warriormode.firebasestorage.app",
+            messagingSenderId: "1085412359805",
+            appId: "1:1085412359805:web:3f674ab66e381ddd837b14",
+            measurementId: "G-6JC52YESWF"
         };
 
-        const matrix = document.getElementById('matrix');
-        const actionTrigger = document.getElementById('action-trigger');
-        const daysCountEl = document.getElementById('days-count');
-        const failureAlert = document.getElementById('failure-alert');
-        const alertQuestion = document.getElementById('alert-question');
-        const alertActions = document.getElementById('alert-actions');
-        const setupScreen = document.getElementById('setup-screen');
-        const welcomeDisplay = document.getElementById('user-welcome-display');
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
 
-        function bootSystem() {
-            if (!coreData.warriorName) {
-                setupScreen.style.display = 'flex';
+        const TOTAL_NODES = 365;
+        let isLoginMode = true; // Toggle variable between Login and Register states
+        
+        // System variables mapping
+        let currentUser = localStorage.getItem('warriorUserSession') || null;
+        let coreData = {
+            securedDays: [],
+            lastLogTimeStamp: null
+        };
+
+        window.bootSystem = function() {
+            if (!currentUser) {
+                document.getElementById('auth-screen').style.display = 'flex';
                 return;
-            } else {
-                setupScreen.style.display = 'none';
-                welcomeDisplay.innerText = `Welcome, ${coreData.warriorName}`;
             }
 
-            buildMatrix();
-            renderUI();
-            liveTimeCheck();
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('user-welcome-display').innerText = `Welcome, ${currentUser}`;
+            
+            // Instantly fetch existing score tracking matrices from database storage endpoints
+            const dbSafeName = currentUser.replace(/[.#$[\]]/g, "");
+            get(ref(database, 'users/' + dbSafeName)).then((snapshot) => {
+                if(snapshot.exists()) {
+                    const userData = snapshot.val();
+                    coreData.securedDays = userData.securedDays || [];
+                    coreData.lastLogTimeStamp = userData.lastLogTimeStamp || null;
+                }
+                buildMatrix();
+                renderUI();
+            });
+
+            listenToLeaderboard();
         }
 
-        function saveUserProfile() {
-            const nameInput = document.getElementById('username-input').value.trim();
-            if (nameInput === "") {
-                alert("Name cannot be empty to trigger Warrior Mode.");
+        window.toggleAuthMode = function() {
+            isLoginMode = !isLoginMode;
+            const title = document.getElementById('auth-title');
+            const subTitle = document.getElementById('auth-subtitle');
+            const toggleMsg = document.getElementById('auth-toggle-msg');
+            const submitBtn = document.getElementById('auth-submit-btn');
+
+            if (isLoginMode) {
+                title.innerText = "WARRIOR LOGIN";
+                subTitle.innerText = "ENTER CREDENTIALS TO SYNC DISCIPLINE";
+                toggleMsg.innerHTML = 'New Warrior? <span>Create Account</span>';
+                submitBtn.innerText = "PROCEED TO RAMPAGE";
+            } else {
+                title.innerText = "CREATE WARRIOR ID";
+                subTitle.innerText = "SET UNIQUE CREDENTIALS FOR DEFENSE";
+                toggleMsg.innerHTML = 'Already registered? <span>Login Here</span>';
+                submitBtn.innerText = "INITIALIZE SYSTEM STREAK";
+            }
+        }
+
+        window.handleAuthAction = function() {
+            const username = document.getElementById('auth-username').value.trim().toLowerCase();
+            const password = document.getElementById('auth-password').value.trim();
+
+            if (!username || !password) {
+                alert("Credentials fields cannot be left blank.");
                 return;
             }
-            coreData.warriorName = nameInput;
-            localStorage.setItem('warriorCoreData', JSON.stringify(coreData));
-            bootSystem();
+
+            const dbSafeName = username.replace(/[.#$[\]]/g, "");
+            const userRef = ref(database, 'users/' + dbSafeName);
+
+            if (isLoginMode) {
+                // System validation for authentication logic
+                get(userRef).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const accountData = snapshot.val();
+                        if (accountData.password === password) {
+                            currentUser = accountData.username;
+                            localStorage.setItem('warriorUserSession', currentUser);
+                            window.bootSystem();
+                        } else {
+                            alert("INCORRECT PASSWORD ACCESS DENIED.");
+                        }
+                    } else {
+                        alert("Warrior identity not found. Please Register.");
+                    }
+                });
+            } else {
+                // Registration checks configuration logic
+                get(userRef).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        alert("Username already active inside database server logs.");
+                    } else {
+                        set(userRef, {
+                            username: username,
+                            password: password,
+                            securedDays: [],
+                            lastLogTimeStamp: null
+                        }).then(() => {
+                            alert("Account created successfully! Welcome to the Grind.");
+                            currentUser = username;
+                            localStorage.setItem('warriorUserSession', currentUser);
+                            window.bootSystem();
+                        });
+                    }
+                });
+            }
+        }
+
+        window.triggerSystemLogout = function() {
+            localStorage.removeItem('warriorUserSession');
+            currentUser = null;
+            coreData = { securedDays: [], lastLogTimeStamp: null };
+            document.getElementById('auth-username').value = '';
+            document.getElementById('auth-password').value = '';
+            document.getElementById('leaderboard-rows').innerHTML = '<tr><td colspan="3" style="text-align: center; color: #666; padding: 20px;">Loading Rankings...</td></tr>';
+            window.bootSystem();
         }
 
         function buildMatrix() {
+            const matrix = document.getElementById('matrix');
             matrix.innerHTML = '';
             for (let i = 1; i <= TOTAL_NODES; i++) {
                 const node = document.createElement('div');
@@ -525,7 +758,8 @@
         }
 
         function renderUI() {
-            daysCountEl.innerText = coreData.securedDays.length;
+            const actionTrigger = document.getElementById('action-trigger');
+            document.getElementById('days-count').innerText = coreData.securedDays.length;
             const todayKey = new Date().toDateString();
 
             if (coreData.lastLogTimeStamp === todayKey) {
@@ -539,14 +773,7 @@
             }
         }
 
-        function liveTimeCheck() {
-            const todayKey = new Date().toDateString();
-            if (coreData.lastLogTimeStamp !== todayKey && actionTrigger.disabled) {
-                renderUI();
-            }
-        }
-
-        function executeDailyLog() {
+        window.executeDailyLog = function() {
             const todayKey = new Date().toDateString();
             if (coreData.lastLogTimeStamp === todayKey) return;
 
@@ -555,53 +782,104 @@
             if (nextTarget <= TOTAL_NODES) {
                 coreData.securedDays.push(nextTarget);
                 coreData.lastLogTimeStamp = todayKey;
-                localStorage.setItem('warriorCoreData', JSON.stringify(coreData));
 
                 const activeNode = document.getElementById(`node-${nextTarget}`);
                 if (activeNode) activeNode.classList.add('secure');
 
                 renderUI();
+                syncToFirebase();
             }
         }
 
-        function triggerFailureProtocol() {
-            alertQuestion.innerText = "Did you commit a wrong act today?";
-            alertActions.innerHTML = `
+        function syncToFirebase() {
+            if (!currentUser) return;
+            const dbSafeName = currentUser.replace(/[.#$[\]]/g, "");
+            
+            // Sync current user states to core records
+            set(ref(database, 'users/' + dbSafeName + '/securedDays'), coreData.securedDays);
+            set(ref(database, 'users/' + dbSafeName + '/lastLogTimeStamp'), coreData.lastLogTimeStamp);
+
+            // Sync global state metrics leaderboard structures
+            set(ref(database, 'leaderboard/' + dbSafeName), {
+                name: currentUser,
+                score: coreData.securedDays.length,
+                lastUpdated: new Date().getTime()
+            });
+        }
+
+        function listenToLeaderboard() {
+            const leaderboardRef = ref(database, 'leaderboard');
+            onValue(leaderboardRef, (snapshot) => {
+                const data = snapshot.val();
+                if (!data) return;
+
+                let participants = [];
+                for (let key in data) {
+                    participants.push(data[key]);
+                }
+
+                participants.sort((a, b) => b.score - a.score || a.lastUpdated - b.lastUpdated);
+
+                const tbody = document.getElementById('leaderboard-rows');
+                tbody.innerHTML = '';
+
+                participants.forEach((player, index) => {
+                    const row = document.createElement('tr');
+                    const rank = index + 1;
+                    
+                    let rankClass = "rank-highlight";
+                    if(rank === 1) rankClass += " rank-1";
+                    if(rank === 2) rankClass += " rank-2";
+                    if(rank === 3) rankClass += " rank-3";
+
+                    if(currentUser === player.name) {
+                        row.classList.add('current-user-row');
+                    }
+
+                    row.innerHTML = `
+                        <td class="${rankClass}">#${rank}</td>
+                        <td style="color: #fff; text-transform: uppercase;">${player.name}</td>
+                        <td style="color: #00ff66; font-family: 'Orbitron', sans-serif;">${player.score} Days</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            });
+        }
+
+        window.triggerFailureProtocol = function() {
+            document.getElementById('alert-question').innerText = "Did you commit a wrong act today?";
+            document.getElementById('alert-actions').innerHTML = `
                 <button class="alert-btn btn-yes" onclick="processFailureAnswer('YES')">YES</button>
                 <button class="alert-btn btn-no" onclick="processFailureAnswer('NO')">NO</button>
             `;
-            failureAlert.style.display = 'flex';
+            document.getElementById('failure-alert').style.display = 'flex';
         }
 
-        function processFailureAnswer(answer) {
+        window.processFailureAnswer = function(answer) {
             if (answer === 'YES') {
-                alertQuestion.innerText = "Honesty preserved. Discipline is a battle. Stand up and do not break the chain tomorrow.";
-                alertActions.innerHTML = `<button class="alert-btn btn-no" onclick="closeFailureAlert()">CONTINUE MODE</button>`;
+                document.getElementById('alert-question').innerText = "Honesty preserved. Discipline is a battle. Stand up and do not break the chain tomorrow.";
+                document.getElementById('alert-actions').innerHTML = `<button class="alert-btn btn-no" onclick="closeFailureAlert()">CONTINUE MODE</button>`;
             } else if (answer === 'NO') {
                 executeHardWipe();
             }
         }
 
         function executeHardWipe() {
-            const preservedName = coreData.warriorName;
-            coreData = { securedDays: [], lastLogTimeStamp: null, warriorName: preservedName };
-            localStorage.setItem('warriorCoreData', JSON.stringify(coreData));
+            coreData = { securedDays: [], lastLogTimeStamp: null };
+            buildMatrix();
+            renderUI();
+            syncToFirebase();
             
-            alertQuestion.innerText = "SYSTEM CRASHED. DISCIPLINE COMPROMISED. STREAK WIPED BACK TO ZERO.";
-            alertActions.innerHTML = `<button class="alert-btn btn-yes" onclick="reloadAfterWipe()">REBOOT FROM DAY 1</button>`;
+            document.getElementById('alert-question').innerText = "SYSTEM CRASHED. DISCIPLINE COMPROMISED. STREAK WIPED BACK TO ZERO.";
+            document.getElementById('alert-actions').innerHTML = `<button class="alert-btn btn-yes" onclick="closeFailureAlert()">REBOOT FROM DAY 1</button>`;
         }
 
-        function closeFailureAlert() {
-            failureAlert.style.display = 'none';
+        window.closeFailureAlert = function() {
+            document.getElementById('failure-alert').style.display = 'none';
         }
 
-        function reloadAfterWipe() {
-            closeFailureAlert();
-            bootSystem();
-        }
-
-        setInterval(liveTimeCheck, 30000);
-        bootSystem();
+        // Initialize App Setup Execution Loops
+        window.bootSystem();
     </script>
 </body>
 </html>
