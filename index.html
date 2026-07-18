@@ -542,13 +542,18 @@
             text-transform: uppercase;
         }
 
-        .rate-info {
-            color: #888;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            background: #161616;
-            padding: 10px;
-            border-left: 3px solid #ff1e1e;
+        .strict-rules-box {
+            color: #ff3333;
+            font-size: 1rem;
+            margin-top: 25px;
+            background: rgba(255, 30, 30, 0.05);
+            padding: 15px;
+            border-left: 4px solid #ff1e1e;
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1.5;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
         }
 
         /* History Table UI */
@@ -831,7 +836,7 @@
             
             <!-- COIN MILESTONE INFO AREA -->
             <div class="reward-info-tier">
-                ESTIMATED REWARD ON STREAK COMPLETION: 36500 COINS
+                ESTIMATED DAILY REWARD: 100 COINS (TOTAL STREAK WORTH: 36500 COINS)
             </div>
 
             <button id="action-trigger" class="trigger-btn" onclick="executeDailyLog()">LOG TODAY'S WORKOUT</button>
@@ -865,21 +870,21 @@
     <div id="withdraw-view" class="page-view" style="display: none;">
         <div class="withdraw-card">
             <h3>SECURED COIN WITHDRAWAL PANEL</h3>
-            <div class="rate-info">
-                Conversion Valuation Infrastructure: <strong>36500 Coins = 36500 INR</strong><br>
-                Requirement Status: 365 Log milestones & 36500 complete vault coins required.
-            </div>
             
             <label>Enter UPI ID / Payment Address</label>
             <input type="text" id="withdraw-upi" placeholder="example@upi, example@paytm...">
             
-            <label>Enter Withdrawal App Name / Method</label>
-            <input type="text" id="withdraw-app" placeholder="e.g., Paytm, PhonePe, GPay...">
-            
             <label>Enter Transfer Vault Amount</label>
-            <input type="number" id="withdraw-amount" placeholder="Required minimum: 36500...">
+            <input type="number" id="withdraw-amount" placeholder="Enter amount to withdraw...">
             
             <button class="trigger-btn" style="max-width: 100%; font-size: 1.1rem; padding: 14px;" onclick="processCoinWithdrawal()">CONFIRM DISBURSEMENT</button>
+            
+            <!-- STRICTOR REGULATION DISCLOSURE BOX -->
+            <div class="strict-rules-box">
+                RULES:<br>
+                36500 COINS = 3650 RUPEES<br>
+                PLEASE COMPLETE 36500 COINS / 365 DAYS TO ELIGIBLE FOR WITHDRAWAL PROCESS.
+            </div>
         </div>
 
         <div class="history-container">
@@ -1107,14 +1112,7 @@
                 navLeagues.classList.add('active');
                 subTitle.innerText = "Global Server Leaderboard Arena";
             } else if (viewName === 'withdraw') {
-                // Modified Requirement Check: Must be 365 Days completed AND exactly 36500 Coins or more available
-                if(coreData.securedDays.length < 365 || coreData.coinBalance < 36500) {
-                    alert("ACCESS DENIED: You must complete all 365 Days AND possess at least 36500 Coins to unlock withdrawal operations!");
-                    homeView.style.display = 'flex';
-                    navHome.classList.add('active');
-                    subTitle.innerText = "365 Days Ultimate Discipline";
-                    return;
-                }
+                // Allows view change freely so the dedicated withdraw panel controls are accessible
                 withdrawView.style.display = 'flex';
                 navWithdraw.classList.add('active');
                 subTitle.innerText = "Secure Financial Disbursement";
@@ -1196,8 +1194,8 @@
                 coreData.securedDays.push(nextTarget);
                 coreData.lastLogTimeStamp = todayKey;
 
-                // Random Generation (100 - 600 Coins)
-                const gainedCoins = Math.floor(Math.random() * (600 - 100 + 1)) + 100;
+                // Fixed Division Value Rule: 36500 Coins / 365 Days = exactly 100 Coins Daily Reward
+                const gainedCoins = 100;
                 coreData.coinBalance += gainedCoins;
 
                 const currentDateTime = new Date().toLocaleString();
@@ -1219,20 +1217,24 @@
 
         window.processCoinWithdrawal = function() {
             const upiInput = document.getElementById('withdraw-upi');
-            const appInput = document.getElementById('withdraw-app');
             const amountInput = document.getElementById('withdraw-amount');
 
             const upiVal = upiInput.value.trim();
-            const appName = appInput.value.trim();
             const amount = parseInt(amountInput.value);
 
-            if(!upiVal || !appName || !amount) {
+            if(!upiVal || !amount) {
                 alert("Please fill up all the requested fields completely.");
                 return;
             }
 
-            if(amount < 36500 || amount > coreData.coinBalance) {
-                alert("Withdrawal operations require a minimum balance request parameter of 36500 Coins!");
+            // Absolute Vault Validation Rule Check: Under 36500 Coins triggers "Sorry insufficient balance"
+            if(coreData.coinBalance < 36500 || amount < 36500) {
+                alert("Sorry insufficient balance");
+                return;
+            }
+
+            if(amount > coreData.coinBalance) {
+                alert("Sorry insufficient balance");
                 return;
             }
 
@@ -1241,7 +1243,7 @@
             
             coreData.history.push({
                 timestamp: currentDateTime,
-                description: `Withdrawn via ${appName} to UPI: ${upiVal}`,
+                description: `Withdrawn securely to UPI Account: ${upiVal}`,
                 amount: amount,
                 type: 'DEBIT'
             });
@@ -1249,7 +1251,6 @@
             alert(`Withdrawal Request of ${amount} Coins generated successfully!`);
             
             upiInput.value = '';
-            appInput.value = '';
             amountInput.value = '';
 
             renderUI();
