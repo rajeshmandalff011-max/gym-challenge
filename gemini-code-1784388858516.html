@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>365 DAYS WARRIOR MODE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050505;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 0, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 0, 0.03) 0%, transparent 40%);
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px 20px;
+            overflow-x: hidden;
+        }
+
+        /* Neon Header */
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-align: center;
+            background: linear-gradient(180deg, #fff 30%, #ff1e1e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(255, 30, 30, 0.6));
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            color: #666;
+            font-size: 0.9rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+        }
+
+        /* Realistic Cyberpunk Rules Box */
+        .rules-container {
+            width: 100%;
+            max-width: 750px;
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.9) 0%, rgba(10, 10, 10, 0.9) 100%);
+            border-left: 5px solid #ff1e1e;
+            border-top: 1px solid #333;
+            border-right: 1px solid #222;
+            border-bottom: 1px solid #222;
+            border-radius: 4px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            position: relative;
+        }
+
+        .rules-container::before {
+            content: "THE WARRIOR CODE";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #ff1e1e;
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 900;
+            padding: 2px 10px;
+            letter-spacing: 2px;
+            border-radius: 2px;
+        }
+
+        .rule-item {
+            font-size: 1.2rem;
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .rule-item span {
+            color: #ff1e1e;
+            font-family: 'Orbitron', sans-serif;
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* Status & Tracker Box */
+        .dashboard {
+            width: 100%;
+            max-width: 750px;
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            margin-bottom: 30px;
+        }
+
+        .counter-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: #888;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+
+        .counter-display strong {
+            font-size: 3.5rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        .counter-display span {
+            color: #ff1e1e;
+            font-size: 2.5rem;
+        }
+
+        /* Hyper Realistic Push Button */
+        .trigger-btn {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(180deg, #ff2e2e 0%, #a00000 100%);
+            color: #fff;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 30px rgba(255, 30, 30, 0.4), inset 0 2px 2px rgba(255,255,255,0.4);
+            border-bottom: 4px solid #500000;
+        }
+
+        .trigger-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(255, 30, 30, 0.7), inset 0 2px 2px rgba(255,255,255,0.4);
+        }
+
+        .trigger-btn:active {
+            transform: translateY(2px);
+            border-bottom-width: 0px;
+        }
+
+        .trigger-btn.locked {
+            background: linear-gradient(180deg, #00ff66 0%, #006622 100%);
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.4);
+            border-bottom: 4px solid #003311;
+            cursor: not-allowed;
+        }
+
+        /* 365 Days Grid Layout */
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
+            gap: 6px;
+            width: 100%;
+            max-width: 750px;
+            background: rgba(10, 10, 10, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #1a1a1a;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.9);
+        }
+
+        .matrix-node {
+            aspect-ratio: 1;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: #444;
+            font-weight: 700;
+            transition: all 0.4s ease;
+        }
+
+        .matrix-node.secure {
+            background: radial-gradient(circle, #00ff66 0%, #003311 100%);
+            color: #fff;
+            border-color: #00ff66;
+            text-shadow: 0 0 5px #fff;
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+        }
+
+        /* Reset System */
+        .system-reset {
+            background: transparent;
+            color: #333;
+            border: 1px dashed #222;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .system-reset:hover {
+            color: #ff1e1e;
+            border-color: #ff1e1e;
+            background: rgba(255, 30, 30, 0.05);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .counter-display strong { font-size: 2.5rem; }
+            .matrix-grid { grid-template-columns: repeat(auto-fill, minmax(28px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>WARRIOR MODE ACTIVATED</h1>
+    <div class="subtitle">365 Days Ultimate Discipline</div>
+
+    <!-- Rule Board -->
+    <div class="rules-container">
+        <div class="rule-item"><span>[RULE 01]</span> GALAT KAAM NA KAREIN (DO NO WRONG).</div>
+        <div class="rule-item"><span>[RULE 02]</span> GALAT SAHO MAT (TOLERATE NO INJUSTICE).</div>
+        <div class="rule-item"><span>[RULE 03]</span> NO MASTURBATION / NO PORN. STICK TO DISCIPLINE.</div>
+        <div class="rule-item"><span>[RULE 04]</span> NO DISTRACTIONS. FOCUS ONLY ON GROWTH.</div>
+    </div>
+
+    <!-- Main Controller -->
+    <div class="dashboard">
+        <div class="counter-display">
+            <strong id="days-count">0</strong> <span>/</span> 365 DAYS SECURED
+        </div>
+        <button id="action-trigger" class="trigger-btn" onclick="executeDailyLog()">LOG TODAY'S WORKOUT</button>
+    </div>
+
+    <!-- Visual Matrix -->
+    <div class="matrix-grid" id="matrix">
+        <!-- Generated by JS -->
+    </div>
+
+    <button class="system-reset" onclick="factoryReset()">RESET SYSTEM DATA</button>
+
+    <script>
+        const TOTAL_NODES = 365;
+        let coreData = JSON.parse(localStorage.getItem('warriorCoreData')) || {
+            securedDays: [],
+            lastLogTimeStamp: null
+        };
+
+        const matrix = document.getElementById('matrix');
+        const actionTrigger = document.getElementById('action-trigger');
+        const daysCountEl = document.getElementById('days-count');
+
+        function bootSystem() {
+            buildMatrix();
+            renderUI();
+            liveTimeCheck();
+        }
+
+        function buildMatrix() {
+            matrix.innerHTML = '';
+            for (let i = 1; i <= TOTAL_NODES; i++) {
+                const node = document.createElement('div');
+                node.classList.add('matrix-node');
+                node.id = `node-${i}`;
+                node.innerText = String(i).padStart(2, '0');
+                
+                if (coreData.securedDays.includes(i)) {
+                    node.classList.add('secure');
+                }
+                matrix.appendChild(node);
+            }
+        }
+
+        function renderUI() {
+            daysCountEl.innerText = coreData.securedDays.length;
+            const todayKey = new Date().toDateString();
+
+            if (coreData.lastLogTimeStamp === todayKey) {
+                actionTrigger.innerText = "TODAY SECURED ✓";
+                actionTrigger.classList.add('locked');
+                actionTrigger.disabled = true;
+            } else {
+                actionTrigger.innerText = "LOG TODAY'S WORKOUT";
+                actionTrigger.classList.remove('locked');
+                actionTrigger.disabled = false;
+            }
+        }
+
+        function liveTimeCheck() {
+            const todayKey = new Date().toDateString();
+            if (coreData.lastLogTimeStamp !== todayKey && actionTrigger.disabled) {
+                renderUI();
+            }
+        }
+
+        function executeDailyLog() {
+            const todayKey = new Date().toDateString();
+            if (coreData.lastLogTimeStamp === todayKey) return;
+
+            const nextTarget = coreData.securedDays.length + 1;
+
+            if (nextTarget <= TOTAL_NODES) {
+                coreData.securedDays.push(nextTarget);
+                coreData.lastLogTimeStamp = todayKey;
+
+                // Sync with Browser Memory (LocalStorage)
+                localStorage.setItem('warriorCoreData', JSON.stringify(coreData));
+
+                // Visual Animation Effect
+                const activeNode = document.getElementById(`node-${nextTarget}`);
+                if (activeNode) activeNode.classList.add('secure');
+
+                renderUI();
+            }
+        }
+
+        function factoryReset() {
+            if (confirm("WARNING: Are you sure you want to wipe out all discipline logs? This cannot be undone.")) {
+                coreData = { securedDays: [], lastLogTimeStamp: null };
+                localStorage.setItem('warriorCoreData', JSON.stringify(coreData));
+                bootSystem();
+            }
+        }
+
+        // Realtime engine check every 30 seconds
+        setInterval(liveTimeCheck, 30000);
+
+        // System Startup
+        bootSystem();
+    </script>
+</body>
+</html>
