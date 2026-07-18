@@ -3,85 +3,1369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WARRIOR ENGINE</title>
+    <title>365 DAYS WARRIOR MODE</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-        body { background: #050505; color: #fff; font-family: 'Orbitron', sans-serif; margin: 0; padding: 20px; }
-        
-        .panel { background: #111; border: 2px solid #ff1e1e; padding: 20px; border-radius: 12px; max-width: 400px; margin: auto; }
-        h2 { color: #ff1e1e; text-align: center; }
-        
-        /* Dashboard Rules Section */
-        .rules-box { border: 1px solid #ff1e1e; padding: 15px; margin-top: 20px; background: #0a0a0a; }
-        .rule { margin-bottom: 15px; color: #ccc; }
-        .rule span { color: #ff1e1e; font-weight: bold; }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap');
 
-        input { width: 100%; padding: 10px; margin: 8px 0; background: #000; border: 1px solid #444; color: #fff; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #ff1e1e; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
-        
-        #captchaCanvas { background: #222; margin: 10px 0; border: 1px solid #ff1e1e; display: block; width: 100%; }
-        
-        .custom-popup { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.95); justify-content: center; align-items: center; z-index: 1000; }
-        .popup-content { background: #111; border: 2px solid #ff1e1e; padding: 25px; width: 80%; max-width: 280px; text-align: center; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050505;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 0, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 0, 0.03) 0%, transparent 40%);
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 20px 90px 20px;
+            overflow-x: hidden;
+        }
+
+        /* HARDCORE GYM AUTHENTICATION LAYER */
+        .profile-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #030303;
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
+                url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(15px);
+        }
+
+        .profile-card {
+            background: linear-gradient(180deg, rgba(25, 25, 25, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
+            border: 3px solid #ff1e1e;
+            padding: 45px 35px;
+            border-radius: 4px;
+            text-align: center;
+            max-width: 480px;
+            width: 90%;
+            box-shadow: 0 0 60px rgba(255, 30, 30, 0.25), inset 0 0 20px rgba(255, 30, 30, 0.1);
+            position: relative;
+        }
+
+        .profile-card::before {
+            content: "SECURE GATEWAY";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff1e1e;
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 900;
+            padding: 4px 15px;
+            letter-spacing: 3px;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+        }
+
+        .profile-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            margin-bottom: 5px;
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .gym-tagline {
+            font-family: 'Rajdhani', sans-serif;
+            color: #ff1e1e;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .profile-card input {
+            width: 100%;
+            padding: 14px;
+            background: #141414;
+            border: 2px solid #333;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            text-align: center;
+            outline: none;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        .profile-card input:focus {
+            border-color: #ff1e1e;
+            background: #1a1a1a;
+            box-shadow: 0 0 20px rgba(255, 30, 30, 0.15);
+        }
+
+        .auth-toggle-text {
+            color: #aaa;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .auth-toggle-text span {
+            color: #ff1e1e;
+            text-decoration: underline;
+            font-weight: 700;
+        }
+
+        .profile-card button {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(180deg, #ff1e1e 0%, #900000 100%);
+            color: #fff;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(255, 30, 30, 0.3);
+            transition: all 0.2s;
+        }
+
+        .profile-card button:hover {
+            background: linear-gradient(180deg, #ff3333 0%, #b30000 100%);
+            box-shadow: 0 0 30px rgba(255, 30, 30, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Top Bar Controls */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 750px;
+            margin-bottom: 15px;
+            background: rgba(20, 20, 20, 0.8);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid #222;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-left-zone {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .welcome-banner {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: #fff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .support-trigger-btn {
+            font-family: 'Orbitron', sans-serif;
+            background: rgba(255, 30, 30, 0.15);
+            color: #ff3333;
+            border: 1px dashed #ff1e1e;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 4px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        .support-trigger-btn:hover {
+            background: #ff1e1e;
+            color: #000;
+            border-style: solid;
+        }
+
+        .balance-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: #00ff66;
+            font-weight: 900;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+        }
+
+        .logout-btn {
+            font-family: 'Orbitron', sans-serif;
+            background: transparent;
+            color: #aaa;
+            border: 1px solid #444;
+            padding: 6px 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .logout-btn:hover {
+            background: #ff1e1e;
+            color: #000;
+            border-color: #ff1e1e;
+            box-shadow: 0 0 15px rgba(255, 30, 30, 0.4);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-align: center;
+            background: linear-gradient(180deg, #fff 30%, #ff1e1e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(255, 30, 30, 0.6));
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            color: #666;
+            font-size: 0.9rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+        }
+
+        /* Views management layout */
+        .page-view {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Rules Container */
+        .rules-container {
+            width: 100%;
+            max-width: 750px;
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.9) 0%, rgba(10, 10, 10, 0.9) 100%);
+            border-left: 5px solid #ff1e1e;
+            border-top: 1px solid #333;
+            border-right: 1px solid #222;
+            border-bottom: 1px solid #222;
+            border-radius: 4px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            position: relative;
+        }
+
+        .rules-container::before {
+            content: "THE WARRIOR CODE";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #ff1e1e;
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 900;
+            padding: 2px 10px;
+            letter-spacing: 2px;
+            border-radius: 2px;
+        }
+
+        .rule-item {
+            font-size: 1.15rem;
+            margin: 14px 0;
+            display: flex;
+            align-items: flex-start;
+            font-weight: 600;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+
+        .rule-item span {
+            color: #ff1e1e;
+            font-family: 'Orbitron', sans-serif;
+            margin-right: 15px;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        /* Dashboard Setup */
+        .dashboard {
+            width: 100%;
+            max-width: 750px;
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .counter-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: #888;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+
+        .counter-display strong {
+            font-size: 3.5rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        .counter-display span {
+            color: #ff1e1e;
+            font-size: 2.5rem;
+        }
+
+        .reward-info-tier {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffc800;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 200, 0, 0.2);
+            border: 1px solid rgba(255, 200, 0, 0.3);
+            padding: 6px 16px;
+            background: rgba(255, 200, 0, 0.05);
+            border-radius: 20px;
+        }
+
+        .trigger-btn {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(180deg, #ff2e2e 0%, #a00000 100%);
+            color: #fff;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+            text-transform: uppercase;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 30px rgba(255, 30, 30, 0.4), inset 0 2px 2px rgba(255,255,255,0.4);
+            border-bottom: 4px solid #500000;
+        }
+
+        .trigger-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(255, 30, 30, 0.7);
+        }
+
+        .trigger-btn:active {
+            transform: translateY(2px);
+            border-bottom-width: 0px;
+        }
+
+        .trigger-btn.locked {
+            background: linear-gradient(180deg, #00ff66 0%, #006622 100%);
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.4);
+            border-bottom: 4px solid #003311;
+            cursor: not-allowed;
+        }
+
+        .fail-btn {
+            font-family: 'Orbitron', sans-serif;
+            background: transparent;
+            color: #ff1e1e;
+            border: 2px solid #ff1e1e;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            box-shadow: inset 0 0 10px rgba(255, 30, 30, 0.1);
+        }
+
+        .fail-btn:hover {
+            background: #ff1e1e;
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 30, 30, 0.6);
+            font-weight: 900;
+        }
+
+        /* LIVE GLOBAL LEADERBOARD */
+        .leaderboard-container {
+            width: 100%;
+            max-width: 750px;
+            background: linear-gradient(180deg, #101010 0%, #070707 100%);
+            border: 2px solid #222;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+            position: relative;
+        }
+
+        .leaderboard-container::before {
+            content: "GLOBAL WARRIOR RANKINGS";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #ff1e1e;
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 900;
+            padding: 3px 12px;
+            letter-spacing: 2px;
+            border-radius: 2px;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .leaderboard-table th {
+            font-family: 'Orbitron', sans-serif;
+            color: #ff1e1e;
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 2px solid #333;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .leaderboard-table td {
+            padding: 14px 10px;
+            border-bottom: 1px solid #1a1a1a;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .leaderboard-table tr:hover td {
+            background: rgba(255, 30, 30, 0.03);
+        }
+
+        .rank-highlight {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .rank-1 { color: #ffd700; text-shadow: 0 0 8px rgba(255, 215, 0, 0.4); }
+        .rank-2 { color: #c0c0c0; }
+        .rank-3 { color: #cd7f32; }
+
+        .current-user-row td {
+            background: rgba(255, 30, 30, 0.1) !important;
+            border-top: 1px solid #ff1e1e;
+            border-bottom: 1px solid #ff1e1e;
+        }
+
+        /* Withdrawal View Structure */
+        .withdraw-card {
+            width: 100%;
+            max-width: 750px;
+            background: #111;
+            border: 2px solid #ff1e1e;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .withdraw-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .withdraw-card input {
+            width: 100%;
+            padding: 12px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .withdraw-card input:focus {
+            border-color: #ff1e1e;
+            outline: none;
+        }
+
+        .withdraw-card label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 700;
+            color: #ccc;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .strict-rules-box {
+            color: #ff3333;
+            font-size: 1rem;
+            margin-top: 25px;
+            background: rgba(255, 30, 30, 0.05);
+            padding: 15px;
+            border-left: 4px solid #ff1e1e;
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1.5;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* History Table UI */
+        .history-container {
+            width: 100%;
+            max-width: 750px;
+            background: #0f0f0f;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .history-table th {
+            color: #ff1e1e;
+            font-family: 'Orbitron', sans-serif;
+            text-align: left;
+            padding: 10px;
+            border-bottom: 2px solid #333;
+            font-size: 0.85rem;
+        }
+
+        .history-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #1c1c1c;
+            font-size: 1rem;
+        }
+
+        .type-credit { color: #00ff66; font-weight: bold; }
+        .type-debit { color: #ff1e1e; font-weight: bold; }
+
+        /* Matrix Grid UI */
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
+            gap: 6px;
+            width: 100%;
+            max-width: 750px;
+            background: rgba(10, 10, 10, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #1a1a1a;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.9);
+        }
+
+        .matrix-node {
+            aspect-ratio: 1;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: #444;
+            font-weight: 700;
+            transition: all 0.4s ease;
+        }
+
+        .matrix-node.secure {
+            background: radial-gradient(circle, #00ff66 0%, #003311 100%);
+            color: #fff;
+            border-color: #00ff66;
+            text-shadow: 0 0 5px #fff;
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+        }
+
+        /* BOTTOM NAV BAR */
+        .game-navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(180deg, #151515 0%, #080808 100%);
+            border-top: 3px solid #252525;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 999;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+        }
+
+        .nav-item {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: #888;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            fill: #888;
+            margin-bottom: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active {
+            color: #ff1e1e;
+            background: rgba(255, 30, 30, 0.03);
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: #ff1e1e;
+            box-shadow: 0 0 10px #ff1e1e;
+        }
+
+        .nav-item.active svg {
+            fill: #ff1e1e;
+            filter: drop-shadow(0 0 5px rgba(255, 30, 30, 0.6));
+        }
+
+        /* Support Box / Custom Alerts Overlay System */
+        .custom-alert {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            z-index: 10005;
+        }
+
+        .alert-box {
+            background: #0f0f0f;
+            border: 2px solid #ff1e1e;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 0 50px rgba(255, 30, 30, 0.4);
+        }
+
+        .alert-box h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: #ff1e1e;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .support-stack-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .support-action-btn {
+            font-family: 'Orbitron', sans-serif;
+            padding: 14px 25px;
+            border: 1px solid #444;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            color: #fff;
+            transition: all 0.3s;
+        }
+
+        .btn-whatsapp {
+            background: #128c7e;
+            border-color: #075e54;
+        }
+        .btn-whatsapp:hover {
+            background: #25d366;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-website {
+            background: #222;
+        }
+        .btn-website:hover {
+            background: #444;
+        }
+
+        .alert-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .alert-btn {
+            font-family: 'Orbitron', sans-serif;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            min-width: 100px;
+            text-transform: uppercase;
+        }
+
+        .btn-yes { background: #ff1e1e; color: #fff; }
+        .btn-no { background: #222; color: #aaa; border: 1px solid #444; }
+        .btn-no:hover { background: #fff; color: #000; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .counter-display strong { font-size: 2.5rem; }
+            .matrix-grid { grid-template-columns: repeat(auto-fill, minmax(28px, 1fr)); }
+        }
     </style>
 </head>
 <body>
 
-<div class="panel">
-    <h2>WARRIOR MODE ACTIVATED</h2>
-    
-    <div class="rules-box">
-        <div class="rule"><span>[RULE 01]</span> DO NO WRONG.</div>
-        <div class="rule"><span>[RULE 02]</span> TOLERATE NO INJUSTICE.</div>
-        <div class="rule"><span>[RULE 03]</span> NO MASTURBATION / NO PORN. STICK TO DISCIPLINE.</div>
-        <div class="rule"><span>[RULE 04]</span> NO DISTRACTIONS. FOCUS ONLY ON GROWTH.</div>
+    <!-- HARDCORE GYM AUTHENTICATION LAYER -->
+    <div class="profile-overlay" id="auth-screen" style="display: none;">
+        <div class="profile-card">
+            <h2 id="auth-title">WARRIOR LOGIN</h2>
+            <div class="gym-tagline" id="auth-subtitle">ENTER CREDENTIALS TO SYNC DISCIPLINE</div>
+            
+            <input type="text" id="auth-username" placeholder="USERNAME..." autocomplete="off">
+            <input type="password" id="auth-password" placeholder="PASSWORD..." autocomplete="off">
+            
+            <div class="auth-toggle-text" id="auth-toggle-msg" onclick="toggleAuthMode()">
+                New Warrior? <span id="toggle-link-text">Create Account</span>
+            </div>
+            
+            <button id="auth-submit-btn" onclick="handleAuthAction()">PROCEED TO RAMPAGE</button>
+        </div>
     </div>
 
-    <canvas id="captchaCanvas" width="200" height="60" onclick="drawCaptcha()"></canvas>
-    <input type="text" id="captchaInput" placeholder="Verification Code">
-    
-    <button onclick="handleProcess()">VALIDATE STREAK</button>
-    <button style="background:#222; color:#ff1e1e; border:1px solid #ff1e1e;" onclick="window.open('https://wa.me/919339072785', '_blank')">CUSTOMER SUPPORT</button>
-</div>
-
-<div id="customPopup" class="custom-popup">
-    <div class="popup-content">
-        <p id="msgText"></p>
-        <button onclick="closePopup()">OK</button>
+    <!-- Top Control Navigation -->
+    <div class="top-nav">
+        <div class="nav-left-zone">
+            <div class="welcome-banner" id="user-welcome-display">Welcome, Warrior</div>
+            <button class="support-trigger-btn" onclick="openSupportMenu()">CUSTOMER SUPPORT</button>
+        </div>
+        <div class="balance-display">COINS: <span id="top-coin-balance">0</span></div>
+        <button class="logout-btn" onclick="triggerSystemLogout()">LOGOUT</button>
     </div>
-</div>
 
-<script>
-    let currentCode = "";
+    <h1>WARRIOR MODE ACTIVATED</h1>
+    <div class="subtitle" id="view-subtitle">365 Days Ultimate Discipline</div>
 
-    function drawCaptcha() {
-        const canvas = document.getElementById('captchaCanvas');
-        const ctx = canvas.getContext('2d');
-        const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-        currentCode = "";
-        for(let i=0; i<5; i++) currentCode += chars.charAt(Math.floor(Math.random() * chars.length));
-        ctx.fillStyle = "#000"; ctx.fillRect(0,0,200,60);
-        ctx.fillStyle = "#ff1e1e"; ctx.font = "30px Orbitron";
-        ctx.fillText(currentCode, 30, 40);
-    }
+    <!-- HOME VIEW -->
+    <div id="home-view" class="page-view">
+        <div class="rules-container">
+            <div class="rule-item"><span>[RULE 01]</span> DO NO WRONG.</div>
+            <div class="rule-item"><span>[RULE 02]</span> TOLERATE NO INJUSTICE.</div>
+            <div class="rule-item"><span>[RULE 03]</span> NO MASTURBATION / NO PORN. STICK TO DISCIPLINE.</div>
+            <div class="rule-item"><span>[RULE 04]</span> NO DISTRACTIONS. FOCUS ONLY ON GROWTH.</div>
+            <div class="rule-item"><span>[RULE 05]</span> DO NOT TURN ON INCOGNITO MODE; PROGRESS WILL WIPE.</div>
+        </div>
 
-    function showPopup(msg) {
-        document.getElementById('msgText').innerText = msg;
-        document.getElementById('customPopup').style.display = 'flex';
-    }
+        <div class="dashboard">
+            <div class="counter-display">
+                <strong id="days-count">0</strong> <span>/</span> 365 DAYS SECURED
+            </div>
+            
+            <!-- COIN MILESTONE INFO AREA -->
+            <div class="reward-info-tier">
+                ESTIMATED DAILY REWARD: 100 COINS (TOTAL STREAK WORTH: 36500 COINS)
+            </div>
 
-    function closePopup() { document.getElementById('customPopup').style.display = 'none'; }
+            <button id="action-trigger" class="trigger-btn" onclick="executeDailyLog()">LOG TODAY'S WORKOUT</button>
+            <button class="fail-btn" onclick="triggerFailureProtocol()">REPORT ACCIDENT / FAIL</button>
+        </div>
 
-    function handleProcess() {
-        if(document.getElementById('captchaInput').value.toUpperCase() !== currentCode) {
-            showPopup("INVALID CODE - ACCESS DENIED");
-            drawCaptcha();
-        } else {
-            showPopup("SYSTEM STREAK UPDATED SUCCESSFULLY");
+        <div class="matrix-grid" id="matrix"></div>
+    </div>
+
+    <!-- LEAGUES / LEADERBOARD VIEW -->
+    <div id="leagues-view" class="page-view" style="display: none;">
+        <div class="leaderboard-container">
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%">Rank</th>
+                        <th style="width: 55%">Warrior Name</th>
+                        <th style="width: 30%">Days Cleared</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-rows">
+                    <tr>
+                        <td colspan="3" style="text-align: center; color: #666; padding: 20px;">Loading Rankings...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- WITHDRAWAL & HISTORY VIEW -->
+    <div id="withdraw-view" class="page-view" style="display: none;">
+        <div class="withdraw-card">
+            <h3>SECURED COIN WITHDRAWAL PANEL</h3>
+            
+            <label>Enter UPI ID / Payment Address</label>
+            <input type="text" id="withdraw-upi" placeholder="example@upi, example@paytm...">
+            
+            <label>Enter Transfer Vault Amount</label>
+            <input type="number" id="withdraw-amount" placeholder="Enter amount to withdraw...">
+            
+            <button class="trigger-btn" style="max-width: 100%; font-size: 1.1rem; padding: 14px;" onclick="processCoinWithdrawal()">CONFIRM DISBURSEMENT</button>
+            
+            <!-- STRICTOR REGULATION DISCLOSURE BOX -->
+            <div class="strict-rules-box">
+                RULES:<br>
+                36500 COINS = 3650 RUPEES<br>
+                PLEASE COMPLETE 36500 COINS / 365 DAYS TO ELIGIBLE FOR WITHDRAWAL PROCESS.
+            </div>
+        </div>
+
+        <div class="history-container">
+            <h3 style="font-family:'Orbitron'; color:#ff1e1e; margin-bottom:15px; font-size:1.1rem; letter-spacing:1px;">TRANSACTION LOG & HISTORY</h3>
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th style="width: 35%">Date & Time</th>
+                        <th style="width: 45%">Description</th>
+                        <th style="width: 20%">Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="history-rows">
+                    <tr>
+                        <td colspan="3" style="text-align: center; color: #555; padding: 15px;">No Logs Recorded.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- GAME MENU BAR -->
+    <div class="game-navbar">
+        <div class="nav-item active" id="nav-home" onclick="switchView('home')">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            HOME
+        </div>
+        <div class="nav-item" id="nav-leagues" onclick="switchView('leagues')">
+            <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v3c0 2.42 1.72 4.44 4.00 4.90C7.79 16.43 9.69 18 12 18s4.21-1.57 4.98-3.10c2.28-.46 4-2.48 4-4.90V7c0-1.1-.9-2-2-2zm-12 5V7h2v3c0 .55-.45 1-1 1s-1-.45-1-1zm10 0c0 .55-.45 1-1 1s-1-.45-1-1V7h2v3zM12 20h-2v2h4v-2h-2z"/></svg>
+            LEAGUES
+        </div>
+        <div class="nav-item" id="nav-withdraw" onclick="switchView('withdraw')">
+            <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+            WITHDRAW
+        </div>
+    </div>
+
+    <!-- Dynamic Overlay Alerts Layout -->
+    <div class="custom-alert" id="failure-alert">
+        <div class="alert-box">
+            <h2 id="alert-question">Did you commit a wrong act today?</h2>
+            <div class="alert-buttons" id="alert-actions"></div>
+        </div>
+    </div>
+
+    <!-- CUSTOM CLIENT CUSTOMER SUPPORT OVERLAY POPUP -->
+    <div class="custom-alert" id="support-alert">
+        <div class="alert-box">
+            <h2>WARRIOR SUPPORT PORTAL</h2>
+            <div style="color: #aaa; font-size: 0.95rem; margin-bottom: 15px;">SELECT COMMUNICATIONS CHANNEL</div>
+            <div class="support-stack-layout">
+                <button class="support-action-btn btn-whatsapp" onclick="routeToWhatsApp()">WhatsApp Support</button>
+                <button class="support-action-btn btn-website" onclick="routeToWebsiteSupport()">Website Support</button>
+                <button class="support-action-btn" style="background:#222; margin-top:10px;" onclick="closeSupportMenu()">CLOSE MODAL</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ENGINE CODE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+        import { getDatabase, ref, set, get, child, onValue } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAigFfSmMz8HSdEwApTuN2T6L5h7i-osKQ",
+            authDomain: "warriormode.firebaseapp.com",
+            databaseURL: "https://warriormode-default-rtdb.firebaseio.com",
+            projectId: "warriormode",
+            storageBucket: "warriormode.firebasestorage.app",
+            messagingSenderId: "1085412359805",
+            appId: "1:1085412359805:web:3f674ab66e381ddd837b14",
+            measurementId: "G-6JC52YESWF"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        const TOTAL_NODES = 365;
+        let isLoginMode = true;
+        
+        let currentUser = localStorage.getItem('warriorUserSession') || null;
+        let coreData = {
+            securedDays: [],
+            lastLogTimeStamp: null,
+            coinBalance: 0,
+            history: []
+        };
+
+        window.bootSystem = function() {
+            if (!currentUser) {
+                clearAuthInputs();
+                document.getElementById('auth-screen').style.display = 'flex';
+                return;
+            }
+
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('user-welcome-display').innerText = `Welcome, ${currentUser}`;
+            
+            const dbSafeName = currentUser.replace(/[.#$[\]]/g, "");
+            get(ref(database, 'users/' + dbSafeName)).then((snapshot) => {
+                if(snapshot.exists()) {
+                    const userData = snapshot.val();
+                    coreData.securedDays = userData.securedDays || [];
+                    coreData.lastLogTimeStamp = userData.lastLogTimeStamp || null;
+                    coreData.coinBalance = userData.coinBalance || 0;
+                    coreData.history = userData.history || [];
+                }
+                buildMatrix();
+                renderUI();
+                renderHistory();
+            });
+
+            listenToLeaderboard();
         }
-    }
-    drawCaptcha();
-</script>
 
+        function clearAuthInputs() {
+            document.getElementById('auth-username').value = '';
+            document.getElementById('auth-password').value = '';
+        }
+
+        window.setAuthMode = function(toLogin) {
+            isLoginMode = toLogin;
+            const title = document.getElementById('auth-title');
+            const subTitle = document.getElementById('auth-subtitle');
+            const toggleMsg = document.getElementById('auth-toggle-msg');
+            const submitBtn = document.getElementById('auth-submit-btn');
+            clearAuthInputs();
+
+            if (isLoginMode) {
+                title.innerText = "WARRIOR LOGIN";
+                subTitle.innerText = "ENTER CREDENTIALS TO SYNC DISCIPLINE";
+                toggleMsg.innerHTML = 'New Warrior? <span>Create Account</span>';
+                submitBtn.innerText = "PROCEED TO RAMPAGE";
+            } else {
+                title.innerText = "CREATE WARRIOR ID";
+                subTitle.innerText = "SET UNIQUE CREDENTIALS FOR DEFENSE";
+                toggleMsg.innerHTML = 'Already registered? <span>Login Here</span>';
+                submitBtn.innerText = "INITIALIZE SYSTEM STREAK";
+            }
+        }
+
+        window.toggleAuthMode = function() {
+            window.setAuthMode(!isLoginMode);
+        }
+
+        window.handleAuthAction = function() {
+            const usernameInput = document.getElementById('auth-username');
+            const passwordInput = document.getElementById('auth-password');
+            const username = usernameInput.value.trim().toLowerCase();
+            const password = passwordInput.value.trim();
+
+            if (!username || !password) {
+                alert("Credentials fields cannot be left blank.");
+                return;
+            }
+
+            const dbSafeName = username.replace(/[.#$[\]]/g, "");
+            const userRef = ref(database, 'users/' + dbSafeName);
+
+            if (isLoginMode) {
+                get(userRef).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const accountData = snapshot.val();
+                        if (accountData.password === password) {
+                            currentUser = accountData.username;
+                            localStorage.setItem('warriorUserSession', currentUser);
+                            window.bootSystem();
+                        } else {
+                            alert("INCORRECT PASSWORD! ACCESS DENIED.");
+                            clearAuthInputs();
+                        }
+                    } else {
+                        alert("Warrior ID not found! Redirecting to 'Create Account' page...");
+                        window.setAuthMode(false);
+                    }
+                });
+            } else {
+                get(userRef).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        alert("Username already active inside database server logs.");
+                        clearAuthInputs();
+                    } else {
+                        set(userRef, {
+                            username: username,
+                            password: password,
+                            securedDays: [],
+                            lastLogTimeStamp: null,
+                            coinBalance: 0,
+                            history: []
+                        }).then(() => {
+                            alert("Account created successfully! Welcome to the Grind.");
+                            currentUser = username;
+                            localStorage.setItem('warriorUserSession', currentUser);
+                            window.bootSystem();
+                        });
+                    }
+                });
+            }
+        }
+
+        window.switchView = function(viewName) {
+            const homeView = document.getElementById('home-view');
+            const leaguesView = document.getElementById('leagues-view');
+            const withdrawView = document.getElementById('withdraw-view');
+            
+            const navHome = document.getElementById('nav-home');
+            const navLeagues = document.getElementById('nav-leagues');
+            const navWithdraw = document.getElementById('nav-withdraw');
+            const subTitle = document.getElementById('view-subtitle');
+
+            navHome.classList.remove('active');
+            navLeagues.classList.remove('active');
+            navWithdraw.classList.remove('active');
+
+            homeView.style.display = 'none';
+            leaguesView.style.display = 'none';
+            withdrawView.style.display = 'none';
+
+            if (viewName === 'home') {
+                homeView.style.display = 'flex';
+                navHome.classList.add('active');
+                subTitle.innerText = "365 Days Ultimate Discipline";
+            } else if (viewName === 'leagues') {
+                leaguesView.style.display = 'flex';
+                navLeagues.classList.add('active');
+                subTitle.innerText = "Global Server Leaderboard Arena";
+            } else if (viewName === 'withdraw') {
+                // Allows view change freely so the dedicated withdraw panel controls are accessible
+                withdrawView.style.display = 'flex';
+                navWithdraw.classList.add('active');
+                subTitle.innerText = "Secure Financial Disbursement";
+            }
+        }
+
+        window.triggerSystemLogout = function() {
+            localStorage.removeItem('warriorUserSession');
+            currentUser = null;
+            coreData = { securedDays: [], lastLogTimeStamp: null, coinBalance: 0, history: [] };
+            clearAuthInputs();
+            document.getElementById('leaderboard-rows').innerHTML = '<tr><td colspan="3" style="text-align: center; color: #666; padding: 20px;">Loading Rankings...</td></tr>';
+            switchView('home');
+            window.bootSystem();
+        }
+
+        function buildMatrix() {
+            const matrix = document.getElementById('matrix');
+            matrix.innerHTML = '';
+            for (let i = 1; i <= TOTAL_NODES; i++) {
+                const node = document.createElement('div');
+                node.classList.add('matrix-node');
+                node.id = `node-${i}`;
+                node.innerText = String(i).padStart(2, '0');
+                
+                if (coreData.securedDays.includes(i)) {
+                    node.classList.add('secure');
+                }
+                matrix.appendChild(node);
+            }
+        }
+
+        function renderUI() {
+            const actionTrigger = document.getElementById('action-trigger');
+            document.getElementById('days-count').innerText = coreData.securedDays.length;
+            document.getElementById('top-coin-balance').innerText = coreData.coinBalance;
+            const todayKey = new Date().toDateString();
+
+            if (coreData.lastLogTimeStamp === todayKey) {
+                actionTrigger.innerText = "TODAY SECURED ✓";
+                actionTrigger.classList.add('locked');
+                actionTrigger.disabled = true;
+            } else {
+                actionTrigger.innerText = "LOG TODAY'S WORKOUT";
+                actionTrigger.classList.remove('locked');
+                actionTrigger.disabled = false;
+            }
+        }
+
+        function renderHistory() {
+            const tbody = document.getElementById('history-rows');
+            if(!coreData.history || coreData.history.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #555; padding: 15px;">No Logs Recorded.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = '';
+            const sortedHistory = [...coreData.history].reverse();
+            sortedHistory.forEach(item => {
+                const row = document.createElement('tr');
+                const amtClass = item.type === 'CREDIT' ? 'type-credit' : 'type-debit';
+                const prefix = item.type === 'CREDIT' ? '+' : '-';
+                
+                row.innerHTML = `
+                    <td style="color:#aaa; font-size:0.9rem;">${item.timestamp}</td>
+                    <td style="color:#fff;">${item.description}</td>
+                    <td class="${amtClass}">${prefix}${item.amount}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        window.executeDailyLog = function() {
+            const todayKey = new Date().toDateString();
+            if (coreData.lastLogTimeStamp === todayKey) return;
+
+            const nextTarget = coreData.securedDays.length + 1;
+
+            if (nextTarget <= TOTAL_NODES) {
+                coreData.securedDays.push(nextTarget);
+                coreData.lastLogTimeStamp = todayKey;
+
+                // Fixed Division Value Rule: 36500 Coins / 365 Days = exactly 100 Coins Daily Reward
+                const gainedCoins = 100;
+                coreData.coinBalance += gainedCoins;
+
+                const currentDateTime = new Date().toLocaleString();
+                coreData.history.push({
+                    timestamp: currentDateTime,
+                    description: `Day ${nextTarget} Workout Cleared Bonus`,
+                    amount: gainedCoins,
+                    type: 'CREDIT'
+                });
+
+                const activeNode = document.getElementById(`node-${nextTarget}`);
+                if (activeNode) activeNode.classList.add('secure');
+
+                renderUI();
+                renderHistory();
+                syncToFirebase();
+            }
+        }
+
+        window.processCoinWithdrawal = function() {
+            const upiInput = document.getElementById('withdraw-upi');
+            const amountInput = document.getElementById('withdraw-amount');
+
+            const upiVal = upiInput.value.trim();
+            const amount = parseInt(amountInput.value);
+
+            if(!upiVal || !amount) {
+                alert("Please fill up all the requested fields completely.");
+                return;
+            }
+
+            // Absolute Vault Validation Rule Check: Under 36500 Coins triggers "Sorry insufficient balance"
+            if(coreData.coinBalance < 36500 || amount < 36500) {
+                alert("Sorry insufficient balance");
+                return;
+            }
+
+            if(amount > coreData.coinBalance) {
+                alert("Sorry insufficient balance");
+                return;
+            }
+
+            coreData.coinBalance -= amount;
+            const currentDateTime = new Date().toLocaleString();
+            
+            coreData.history.push({
+                timestamp: currentDateTime,
+                description: `Withdrawn securely to UPI Account: ${upiVal}`,
+                amount: amount,
+                type: 'DEBIT'
+            });
+
+            alert(`Withdrawal Request of ${amount} Coins generated successfully!`);
+            
+            upiInput.value = '';
+            amountInput.value = '';
+
+            renderUI();
+            renderHistory();
+            syncToFirebase();
+        }
+
+        function syncToFirebase() {
+            if (!currentUser) return;
+            const dbSafeName = currentUser.replace(/[.#$[\]]/g, "");
+            
+            set(ref(database, 'users/' + dbSafeName + '/securedDays'), coreData.securedDays);
+            set(ref(database, 'users/' + dbSafeName + '/lastLogTimeStamp'), coreData.lastLogTimeStamp);
+            set(ref(database, 'users/' + dbSafeName + '/coinBalance'), coreData.coinBalance);
+            set(ref(database, 'users/' + dbSafeName + '/history'), coreData.history);
+
+            set(ref(database, 'leaderboard/' + dbSafeName), {
+                name: currentUser,
+                score: coreData.securedDays.length,
+                lastUpdated: new Date().getTime()
+            });
+        }
+
+        function listenToLeaderboard() {
+            const leaderboardRef = ref(database, 'leaderboard');
+            onValue(leaderboardRef, (snapshot) => {
+                const data = snapshot.val();
+                if (!data) return;
+
+                let participants = [];
+                for (let key in data) {
+                    participants.push(data[key]);
+                }
+
+                participants.sort((a, b) => b.score - a.score || a.lastUpdated - b.lastUpdated);
+
+                const tbody = document.getElementById('leaderboard-rows');
+                tbody.innerHTML = '';
+
+                participants.forEach((player, index) => {
+                    const row = document.createElement('tr');
+                    const rank = index + 1;
+                    
+                    let rankClass = "rank-highlight";
+                    if(rank === 1) rankClass += " rank-1";
+                    if(rank === 2) rankClass += " rank-2";
+                    if(rank === 3) rankClass += " rank-3";
+
+                    if(currentUser === player.name) {
+                        row.classList.add('current-user-row');
+                    }
+
+                    row.innerHTML = `
+                        <td class="${rankClass}">#${rank}</td>
+                        <td style="color: #fff; text-transform: uppercase;">${player.name}</td>
+                        <td style="color: #00ff66; font-family: 'Orbitron', sans-serif;">${player.score} Days</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            });
+        }
+
+        window.triggerFailureProtocol = function() {
+            document.getElementById('alert-question').innerText = "Did you commit a wrong act today?";
+            document.getElementById('alert-actions').innerHTML = `
+                <button class="alert-btn btn-yes" onclick="processFailureAnswer('YES')">YES</button>
+                <button class="alert-btn btn-no" onclick="processFailureAnswer('NO')">NO</button>
+            `;
+            document.getElementById('failure-alert').style.display = 'flex';
+        }
+
+        window.processFailureAnswer = function(answer) {
+            if (answer === 'YES') {
+                document.getElementById('alert-question').innerText = "Honesty preserved. Discipline is a battle. Stand up and do not break the chain tomorrow.";
+                document.getElementById('alert-actions').innerHTML = `<button class="alert-btn btn-no" onclick="closeFailureAlert()">CONTINUE MODE</button>`;
+            } else if (answer === 'NO') {
+                executeHardWipe();
+            }
+        }
+
+        function executeHardWipe() {
+            coreData = { securedDays: [], lastLogTimeStamp: null, coinBalance: 0, history: [] };
+            buildMatrix();
+            renderUI();
+            renderHistory();
+            syncToFirebase();
+            
+            document.getElementById('alert-question').innerText = "SYSTEM CRASHED. DISCIPLINE COMPROMISED. STREAK WIPED BACK TO ZERO.";
+            document.getElementById('alert-actions').innerHTML = `<button class="alert-btn btn-yes" onclick="closeFailureAlert()">REBOOT FROM DAY 1</button>`;
+        }
+
+        window.closeFailureAlert = function() {
+            document.getElementById('failure-alert').style.display = 'none';
+        }
+
+        /* Support Panel Navigation Controls */
+        window.openSupportMenu = function() {
+            document.getElementById('support-alert').style.display = 'flex';
+        }
+
+        window.closeSupportMenu = function() {
+            document.getElementById('support-alert').style.display = 'none';
+        }
+
+        window.routeToWhatsApp = function() {
+            const waNumber = "9339072785";
+            const message = encodeURIComponent("Hello Support Team, I need assistance regarding my Warrior Mode account.");
+            window.open(`https://wa.me/${waNumber}?text=${message}`, '_blank');
+        }
+
+        window.routeToWebsiteSupport = function() {
+            alert("Website Support Unavailable");
+        }
+
+        window.bootSystem();
+    </script>
 </body>
 </html>
